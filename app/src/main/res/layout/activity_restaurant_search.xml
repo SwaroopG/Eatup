@@ -17,12 +17,24 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
+    <SearchView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/restaurantSearchView"
+        android:layout_below="@+id/restaurant_search_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:title="search"
+        android:showAsAction="always"
+        android:actionViewClass="android.widget.SearchView" />
+
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/restaurantView"
-        android:layout_below="@+id/restaurant_search_title"
+        android:layout_below="@+id/restaurantSearchView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:choiceMode="singleChoice" />
+
 </RelativeLayout>

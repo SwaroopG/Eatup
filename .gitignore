@@ -2,9 +2,7 @@
 /local.properties
 .DS_Store
 /build
-/captures
 
 # Intellij
-.idea/
 *.iml
-*.iws
+.idea

@@ -10,18 +10,24 @@ import android.widget.ListView;
 
 public class RestaurantSearchActivity extends Activity {
 
+    private ListView restaurantListView;
+    private String[] stringArray;
+    private ArrayAdapter restaurantItemArrayAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_search);
-        String[] stringArray = new String[10];
+
+
+        stringArray = new String[10];
         for (int i = 0; i < stringArray.length; i++) {
             stringArray[i] = "String " + i;
         }
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, stringArray);
 
-        ListView stringListView = (ListView) findViewById(R.id.restaurantView);
-        stringListView.setAdapter(arrayAdapter);
+        restaurantItemArrayAdapter = new RestaurantAdapter(this, stringArray);
+        restaurantListView = (ListView) findViewById(R.id.restaurantView);
+        restaurantListView.setAdapter(restaurantItemArrayAdapter);
     }
 
     @Override
