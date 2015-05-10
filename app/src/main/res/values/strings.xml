@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Eatup</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="title_activity_restaurant_search">RestaurantSearchActivity</string>
+
+    <string name="signin_button">Sign In</string>
+    <string name="google_signin_button">Google</string>
+    <string name="facebook_signin_button">Facebook</string>
+
+    <string name="restaurant_search_title">Restaurant Search</string>
+</resources>
