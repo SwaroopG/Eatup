@@ -8,27 +8,27 @@
         android:id="@+id/imageView1"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/ruchi"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="5dp" />
+        android:layout_marginTop="5dp"
+        android:src="@drawable/restaurant_icon" />
 
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:layout_marginLeft="10dp"
-        android:gravity="left">
+        android:gravity="left"
+        android:orientation="vertical">
 
 
         <TextView
             android:id="@+id/textView1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ruchi Restaurant"
+            android:text="Eatup Restaurant"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="19sp"
             android:textColor="#222222"
+            android:textSize="19sp"
             android:textStyle="bold" />
 
 
@@ -36,12 +36,12 @@
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Address blah blah..."
-            android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_marginTop="5dp"
             android:ellipsize="end"
-            android:lines="3"
-            android:textColor="#666666"
+            android:lines="2"
+            android:text="Address blah blah..."
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#222222"
             android:textSize="14sp" />
 
 
@@ -49,10 +49,11 @@
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Navigate"
-            android:textAppearance="?android:attr/textAppearanceSmall"
             android:layout_marginTop="5dp"
-            android:textColor="#999999"
+            android:lines="2"
+            android:text="Navigate"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#222222"
             android:textSize="12sp" />
 
 
