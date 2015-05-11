@@ -21,16 +21,12 @@ public class SignonActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signon);
 
-        Button signinButton = (Button) findViewById(R.id.signin_button);
+        Button signinButton = (Button) findViewById(R.id.sign_in_button);
         restaurantSearchIntent(signinButton);
-
 
         Button facebookSigninButton = (Button) findViewById(R.id.facebook_signin_button);
         restaurantSearchIntent(facebookSigninButton);
 
-
-        Button googleSigninButton = (Button) findViewById(R.id.google_signin_button);
-        restaurantSearchIntent(googleSigninButton);
     }
 
     private void restaurantSearchIntent(final Button button) {
