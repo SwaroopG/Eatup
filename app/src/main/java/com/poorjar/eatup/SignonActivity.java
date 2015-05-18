@@ -1,7 +1,12 @@
 package com.poorjar.eatup;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -16,30 +21,72 @@ import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.google.android.gms.auth.GoogleAuthUtil;
+import com.poorjar.commons.CommonUtilities;
+
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.ListUtils;
+
+import java.util.List;
 
 /**
- * TODO: Add Google Login
- * Class that provides Google and Facebook login.
+ * Initial activity. Class that provides the sign-on funtionality.
  */
 public class SignonActivity extends Activity {
 
     private CallbackManager callbackManager;
+    private AccountManager accountManager;
+    private static final String SCOPE = "oauth2:https://www.googleapis.com/auth/userinfo.profile";
+
+    private GoogleSignInHelper googleSignInHelper;
+
+    private String token;
+    private int serverCode;
+
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FacebookSdk.sdkInitialize(getApplicationContext());
+        context = getApplicationContext();
+        FacebookSdk.sdkInitialize(context);
 
+        // Create the callback manager
         callbackManager = CallbackManager.Factory.create();
 
+        // Initialize Facebook & Google log-in
         registerFacebookLoginManager();
+        syncGoogleAccount();
 
+        // Set the rest
         setContentView(R.layout.activity_signon);
-
-        Button signinButton = (Button) findViewById(R.id.sign_in_button);
-        restaurantSearchIntent(signinButton);
+        restaurantSearchIntent((Button) findViewById(R.id.sign_in_button));
     }
 
+    /**
+     * Google sign-on
+     */
+    public void syncGoogleAccount() {
+        accountManager = AccountManager.get(this);
+        googleSignInHelper = GoogleSignInHelper.getInstance(AccountManager.get(this));
+
+        if (CommonUtilities.isNetworkAvailable(context) == true) {
+            List<String> accountNames = GoogleSignInHelper.getAccountNames();
+            if (!CollectionUtils.isEmpty(accountNames)) {
+                Log.e("AccountName : ", accountNames.get(0));
+                //you can set here account for login
+            } else {
+                Toast.makeText(context, "Google Accounts not available!", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(context, "Network Service not available!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    /**
+     * Default Button behavior.
+     */
     private void restaurantSearchIntent(final Button button) {
         button.setOnClickListener(new View.OnClickListener() {
 
@@ -53,7 +100,7 @@ public class SignonActivity extends Activity {
      * Switch to the restaurant list menu.
      */
     private void onSuccessAction() {
-        Intent restaurantActivity = new Intent(getApplicationContext(), RestaurantSearchActivity.class);
+        Intent restaurantActivity = new Intent(context, RestaurantSearchActivity.class);
         startActivity(restaurantActivity);
     }
 
@@ -71,12 +118,12 @@ public class SignonActivity extends Activity {
 
                     @Override
                     public void onCancel() {
-                        Toast.makeText(getApplicationContext(), "Login Cancel", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "Login Cancel", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
                     public void onError(FacebookException exception) {
-                        Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, exception.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
     }
